@@ -24,7 +24,7 @@ do
     output="`dirname ${source}`/Icon-${sizename}.png"
     cp "${source}" "${output}"
     convert -resize ${size}x${size} "${output}" "${output}"
-    identify "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
 done
 
 echo
@@ -36,7 +36,7 @@ do
     output="`dirname ${source}`/Icon-${sizename}@2x.png"
     cp "${source}" "${output}"
     convert -resize ${size}x${size} "${output}" "${output}"
-    identify "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
 done
 
 echo
@@ -48,7 +48,7 @@ do
     output="`dirname ${source}`/Icon-${sizename}@3x.png"
     cp "${source}" "${output}"
     convert -resize ${size}x${size} "${output}" "${output}"
-    identify "${output}"
+    identify "${output}" | awk '{ print $1 " " $3 }'
 done
 
 echo
