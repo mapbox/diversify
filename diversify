@@ -1,0 +1,54 @@
+#!/bin/sh
+
+sizes1x="29 40 50 57 72 76 120"
+sizes2x="29 40 50 57 60 72 76"
+sizes3x="29 40 60"
+
+if [[ -z `which convert` ]]; then
+    echo "Requires ImageMagick!"
+    exit 1
+fi
+
+source="$1"
+
+if [[ -z "${source}" ]]; then
+    echo "Usage: $0 <source>"
+    exit 1
+fi
+
+echo
+echo "Creating 1x icons..."
+for size in ${sizes1x}
+do
+    sizename=${size}
+    output="`dirname ${source}`/Icon-${sizename}.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}"
+done
+
+echo
+echo "Creating 2x icons..."
+for size in ${sizes2x}
+do
+    sizename=${size}
+    size=$(( ${size} * 2 ))
+    output="`dirname ${source}`/Icon-${sizename}@2x.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}"
+done
+
+echo
+echo "Creating 3x icons..."
+for size in ${sizes3x}
+do
+    sizename=${size}
+    size=$(( ${size} * 3 ))
+    output="`dirname ${source}`/Icon-${sizename}@3x.png"
+    cp "${source}" "${output}"
+    convert -resize ${size}x${size} "${output}" "${output}"
+    identify "${output}"
+done
+
+echo
