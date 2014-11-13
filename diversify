@@ -5,7 +5,7 @@ sizes2x="29 40 50 57 60 72 76"
 sizes3x="29 40 60"
 
 if [[ -z `which convert` ]]; then
-    echo "Requires ImageMagick!"
+    echo "Requires ImageMagick! Try `brew install imagemagick`"
     exit 1
 fi
 
